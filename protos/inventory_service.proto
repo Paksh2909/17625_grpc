@@ -1,0 +1,25 @@
+syntax = "proto2";
+import "book.proto";
+package assignment3;
+
+service Inventory {
+    rpc CreateBook(CreateBookRequest) returns (CreateBookReply) {}
+    rpc GetBook (GetBookRequest) returns (GetBookReply) {}
+}
+
+message CreateBookRequest {
+    required Book book = 1;
+}
+
+message CreateBookReply {
+    optional string message = 1;
+}
+
+message GetBookRequest {
+    required string isbn = 1;
+}
+
+message GetBookReply {
+    optional Book book = 1;
+    required string message = 2;
+}

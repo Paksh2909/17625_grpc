@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+package assignment3;
+
+message Book {
+    
+    message Author {
+        required string name = 6;
+    }
+
+    enum Genre {
+        FICTION = 7;
+        FANTASY = 8;
+        ROMANCE = 9;
+        MYSTERY = 10;
+    }
+
+    required string isbn = 1;
+    required string title = 2;
+    required int32 year = 4;
+    required Genre genre = 3;
+    required Author author = 5;
+}
+
+
