@@ -6,6 +6,8 @@ import inventory_service_pb2
 import book_pb2
 
 class Inventory(inventory_service_pb2_grpc.InventoryServicer):
+
+    # Storing the books in a list of objects. 
     books = [
         {
             "isbn": "1",
@@ -26,10 +28,12 @@ class Inventory(inventory_service_pb2_grpc.InventoryServicer):
     def CreateBook(self, request, context):
         book = request.book
         for i in self.books:
+             #Checking is ISBN already exists
             if request.book.isbn == i["isbn"]:
                 return inventory_service_pb2.CreateBookReply(message= "ISBN already exists. Could not add book.", 
                 code= "6: ALREADY_EXISTS")
 
+        #Creating a new book object from request
         new_book = {
             "isbn": book.isbn,
             "title": book.title,
@@ -37,6 +41,8 @@ class Inventory(inventory_service_pb2_grpc.InventoryServicer):
             "genre": book.genre,
             'year': book.year
         }
+
+        #Adding new book to list of books
         self.books.append(new_book)
         return inventory_service_pb2.CreateBookReply(message= "Book added successfully.", code= "0: OK")
 
@@ -44,6 +50,7 @@ class Inventory(inventory_service_pb2_grpc.InventoryServicer):
         response = book_pb2.Book()
         present = False
         for i in self.books:
+            #Checking if requested ISBN exists
             if i["isbn"] == request.isbn:
                 present = True
                 response = book_pb2.Book(isbn=i["isbn"],
@@ -52,8 +59,11 @@ class Inventory(inventory_service_pb2_grpc.InventoryServicer):
                     author= i["author"],
                     year= i["year"],
                 )
+
+        #If found, returns Book details
         if present:
             return inventory_service_pb2.GetBookReply(book= response, message = "Book found", code= "0: OK")
+        #Else returns not found message
         else:
             return inventory_service_pb2.GetBookReply(message = "Book not found", code= "5: NOT_FOUND")
                       
