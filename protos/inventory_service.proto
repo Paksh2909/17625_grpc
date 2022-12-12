@@ -3,23 +3,32 @@ import "book.proto";
 package assignment3;
 
 service Inventory {
+    //RPC for creating a book and adding it the DB
     rpc CreateBook(CreateBookRequest) returns (CreateBookReply) {}
+
+    //RPC for fetching a book from the DB
     rpc GetBook (GetBookRequest) returns (GetBookReply) {}
 }
 
+//Accepting a Book parameter
 message CreateBookRequest {
     required Book book = 1;
 }
 
+//Returning a string with appropiate message
 message CreateBookReply {
-    optional string message = 1;
+    required string message = 1;
+    required string code = 2;
 }
 
+//Accepting a string representing the ISBN to search
 message GetBookRequest {
     required string isbn = 1;
 }
 
+//Returns a Book object if found, message indicates success or failure.
 message GetBookReply {
     optional Book book = 1;
     required string message = 2;
+    required string code = 3;
 }

@@ -8,17 +8,20 @@ message Book {
         required string name = 6;
     }
 
+    //Enum to store the possible genre types
     enum Genre {
-        FICTION = 7;
-        FANTASY = 8;
-        ROMANCE = 9;
-        MYSTERY = 10;
+        FICTION = 0;
+        FANTASY = 1;
+        ROMANCE = 2;
+        MYSTERY = 3;
+        NONFICTION = 4;
     }
 
-    required string isbn = 1;
+    //Fields are required as we want all books to have these properties
+    required string isbn = 1;          
     required string title = 2;
     required int32 year = 4;
-    required Genre genre = 3;
+    required Genre genre = 3 [default = NONFICTION];
     required Author author = 5;
 }
 

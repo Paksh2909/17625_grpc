@@ -30,13 +30,15 @@ class InventoryServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def CreateBook(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """RPC for creating a book and adding it the DB
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetBook(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """RPC for fetching a book from the DB
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')

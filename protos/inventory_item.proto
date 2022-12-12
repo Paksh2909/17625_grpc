@@ -10,7 +10,7 @@ message InventoryItem {
         Book book = 2;
     }
     
-    required Status status = 3;
+    required Status status = 3 [default = AVAILABLE];
 
     enum Status{
         AVAILABLE = 4;

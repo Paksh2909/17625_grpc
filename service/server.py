@@ -27,7 +27,8 @@ class Inventory(inventory_service_pb2_grpc.InventoryServicer):
         book = request.book
         for i in self.books:
             if request.book.isbn == i["isbn"]:
-                return inventory_service_pb2.CreateBookReply(message= "ISBN already exists. Could not add book.")
+                return inventory_service_pb2.CreateBookReply(message= "ISBN already exists. Could not add book.", 
+                code= "6: ALREADY_EXISTS")
 
         new_book = {
             "isbn": book.isbn,
@@ -37,7 +38,7 @@ class Inventory(inventory_service_pb2_grpc.InventoryServicer):
             'year': book.year
         }
         self.books.append(new_book)
-        return inventory_service_pb2.CreateBookReply(message= "Book added successfully.")
+        return inventory_service_pb2.CreateBookReply(message= "Book added successfully.", code= "0: OK")
 
     def GetBook(self, request, context):
         response = book_pb2.Book()
@@ -52,9 +53,9 @@ class Inventory(inventory_service_pb2_grpc.InventoryServicer):
                     year= i["year"],
                 )
         if present:
-            return inventory_service_pb2.GetBookReply(book= response, message = "Book found")
+            return inventory_service_pb2.GetBookReply(book= response, message = "Book found", code= "0: OK")
         else:
-            return inventory_service_pb2.GetBookReply(message = "Book not found")
+            return inventory_service_pb2.GetBookReply(message = "Book not found", code= "5: NOT_FOUND")
                       
         
 

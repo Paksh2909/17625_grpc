@@ -20,6 +20,7 @@ class Book(_message.Message):
     GENRE_FIELD_NUMBER: _ClassVar[int]
     ISBN_FIELD_NUMBER: _ClassVar[int]
     MYSTERY: Book.Genre
+    NONFICTION: Book.Genre
     ROMANCE: Book.Genre
     TITLE_FIELD_NUMBER: _ClassVar[int]
     YEAR_FIELD_NUMBER: _ClassVar[int]

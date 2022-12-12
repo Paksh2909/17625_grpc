@@ -6,10 +6,12 @@ from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Opti
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class CreateBookReply(_message.Message):
-    __slots__ = ["message"]
+    __slots__ = ["code", "message"]
+    CODE_FIELD_NUMBER: _ClassVar[int]
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    code: str
     message: str
-    def __init__(self, message: _Optional[str] = ...) -> None: ...
+    def __init__(self, message: _Optional[str] = ..., code: _Optional[str] = ...) -> None: ...
 
 class CreateBookRequest(_message.Message):
     __slots__ = ["book"]
@@ -18,12 +20,14 @@ class CreateBookRequest(_message.Message):
     def __init__(self, book: _Optional[_Union[_book_pb2.Book, _Mapping]] = ...) -> None: ...
 
 class GetBookReply(_message.Message):
-    __slots__ = ["book", "message"]
+    __slots__ = ["book", "code", "message"]
     BOOK_FIELD_NUMBER: _ClassVar[int]
+    CODE_FIELD_NUMBER: _ClassVar[int]
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
     book: _book_pb2.Book
+    code: str
     message: str
-    def __init__(self, book: _Optional[_Union[_book_pb2.Book, _Mapping]] = ..., message: _Optional[str] = ...) -> None: ...
+    def __init__(self, book: _Optional[_Union[_book_pb2.Book, _Mapping]] = ..., message: _Optional[str] = ..., code: _Optional[str] = ...) -> None: ...
 
 class GetBookRequest(_message.Message):
     __slots__ = ["isbn"]
