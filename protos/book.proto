@@ -1,11 +1,11 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package assignment3;
 
 message Book {
     
     message Author {
-        required string name = 6;
+        string name = 6;
     }
 
     //Enum to store the possible genre types
@@ -17,12 +17,11 @@ message Book {
         NONFICTION = 4;
     }
 
-    //Fields are required as we want all books to have these properties
-    required string isbn = 1;          
-    required string title = 2;
-    required int32 year = 4;
-    required Genre genre = 3 [default = NONFICTION];
-    required Author author = 5;
+     string isbn = 1;          
+     string title = 2;
+     int32 year = 4;
+     Genre genre = 3;
+     Author author = 5;
 }
 
 

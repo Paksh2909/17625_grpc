@@ -1,19 +1,18 @@
-syntax = "proto2";
+syntax = "proto3";
 import "book.proto";
 package assignment3;
 
 message InventoryItem {
+  int32 number = 1;
 
-    required int32 number = 1;
-    
-    oneof book_object{
-        Book book = 2;
-    }
-    
-    required Status status = 3 [default = AVAILABLE];
+  oneof book_object{
+    Book book = 2;
+  }
 
-    enum Status{
-        AVAILABLE = 4;
-        TAKEN = 5;
-    }
+  Status status = 3 ;
+
+  enum Status{
+    AVAILABLE = 0;
+    TAKEN = 1;
+  }
 }

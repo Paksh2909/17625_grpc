@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 import "book.proto";
 package assignment3;
 
@@ -12,23 +12,23 @@ service Inventory {
 
 //Accepting a Book parameter
 message CreateBookRequest {
-    required Book book = 1;
+     Book book = 1;
 }
 
-//Returning a string with appropiate message
+//Returning a string with appropriate message
 message CreateBookReply {
-    required string message = 1;
-    required string code = 2;
+     string message = 1;
+     string code = 2;
 }
 
 //Accepting a string representing the ISBN to search
 message GetBookRequest {
-    required string isbn = 1;
+     string isbn = 1;
 }
 
 //Returns a Book object if found, message indicates success or failure.
 message GetBookReply {
-    optional Book book = 1;
-    required string message = 2;
-    required string code = 3;
+     Book book = 1;
+     string message = 2;
+     string code = 3;
 }
