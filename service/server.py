@@ -69,7 +69,6 @@ class Inventory(inventory_service_pb2_grpc.InventoryServicer):
             return inventory_service_pb2.CreateBookReply(message="ISBN incorrect.",
                                                          code="3: INVALID_ARGUMENT")
 
-        response = book_pb2.Book()
         present = False
         for i in self.books:
             # Checking if requested ISBN exists
