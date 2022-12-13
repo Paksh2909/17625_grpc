@@ -29,18 +29,26 @@ class Inventory(inventory_service_pb2_grpc.InventoryServicer):
         book = request.book
 
         if request.book.isbn == "" or request.book.isbn is None:
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+            context.set_details("ISBN incorrect.")
             return inventory_service_pb2.CreateBookReply(message="ISBN incorrect.",
                                                          code="3: INVALID_ARGUMENT")
 
         if request.book.title == "" or request.book.title is None:
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+            context.set_details("Title incorrect.")
             return inventory_service_pb2.CreateBookReply(message="Title incorrect.",
                                                          code="3: INVALID_ARGUMENT")
 
         if request.book.author == "" or request.book.author is None:
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+            context.set_details("Author incorrect.")
             return inventory_service_pb2.CreateBookReply(message="Author incorrect.",
                                                          code="3: INVALID_ARGUMENT")
 
         if request.book.year is None or request.book.year < 800:
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+            context.set_details("Year incorrect.")
             return inventory_service_pb2.CreateBookReply(message="Year incorrect.",
                                                          code="3: INVALID_ARGUMENT")
 
@@ -64,10 +72,12 @@ class Inventory(inventory_service_pb2_grpc.InventoryServicer):
         return inventory_service_pb2.CreateBookReply(message="Book added successfully.", code="0: OK")
 
     def GetBook(self, request, context):
-
+        print("isbn: ", request.isbn)
         if request.isbn == "" or request.isbn is None:
-            return inventory_service_pb2.CreateBookReply(message="ISBN incorrect.",
-                                                         code="3: INVALID_ARGUMENT")
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+            context.set_details("ISBN incorrect.")
+            return inventory_service_pb2.GetBookReply(message="ISBN incorrect.",
+                                                      code="3: INVALID_ARGUMENT")
 
         present = False
         for i in self.books:
